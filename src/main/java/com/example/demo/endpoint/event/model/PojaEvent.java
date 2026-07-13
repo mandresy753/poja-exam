@@ -39,6 +39,6 @@ public abstract class PojaEvent implements Serializable {
   }
 
   public String getEventSource() {
-    return "course.register.demo.event1";
+    return "com.example.demo.event1";
   }
 }
