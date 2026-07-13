@@ -3,6 +3,7 @@ package com.example.demo.endpoint.rest.controller.health;
 import static com.example.demo.endpoint.rest.controller.health.PingController.OK;
 import static java.io.File.createTempFile;
 
+
 import com.example.demo.PojaGenerated;
 import com.example.demo.mail.Email;
 import com.example.demo.mail.Mailer;

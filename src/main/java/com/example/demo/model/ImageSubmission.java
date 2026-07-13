@@ -1,0 +1,10 @@
+package com.example.demo.model;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import java.time.Instant;
+import java.util.UUID;
+import lombok.Builder;
+
+@Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public record ImageSubmission(UUID id, String nomFichier, String email, Instant createdAt) {}

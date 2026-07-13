@@ -25,7 +25,7 @@ public class EventServiceInvoker implements Consumer<TypedEvent> {
   @Override
   public void accept(TypedEvent typedEvent) {
     var typeName = typedEvent.typeName();
-    var eventClasses = getAllClasses("com.example.demo.endpoint.event.model");
+    var eventClasses = getAllClasses("course.register.demo.endpoint.event.model");
     for (var clazz : eventClasses) {
       if (clazz.getTypeName().equals(typeName)) {
         var serviceClazz = Class.forName(getEventService(typeName));
@@ -40,7 +40,7 @@ public class EventServiceInvoker implements Consumer<TypedEvent> {
 
   private String getEventService(String eventClazzName) {
     var typeNameAsArray = eventClazzName.split("\\.");
-    return "com.example.demo.service.event."
+    return "course.register.demo.service.event."
         + typeNameAsArray[typeNameAsArray.length - 1]
         + "Service";
   }

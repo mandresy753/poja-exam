@@ -4,10 +4,10 @@ import static java.lang.Integer.parseInt;
 
 import com.amazonaws.services.lambda.runtime.events.SQSEvent.SQSMessage;
 import com.example.demo.PojaGenerated;
-import com.example.demo.endpoint.event.EventConf;
-import com.example.demo.endpoint.event.model.PojaEvent;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.demo.endpoint.event.EventConf;
+import com.example.demo.endpoint.event.model.PojaEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
