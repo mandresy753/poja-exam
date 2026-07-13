@@ -2,7 +2,6 @@ package com.example.demo.endpoint.rest.controller;
 
 import com.example.demo.model.ImageSubmission;
 import com.example.demo.service.ImageSubmissionService;
-
 import java.io.IOException;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -22,7 +21,8 @@ public class ImageSubmissionController {
 
   @PostMapping
   public ImageSubmission submit(
-      @RequestParam("image") MultipartFile image, @RequestParam("email") String email) throws IOException {
+      @RequestParam("image") MultipartFile image, @RequestParam("email") String email)
+      throws IOException {
     return service.submit(image, email);
   }
 }

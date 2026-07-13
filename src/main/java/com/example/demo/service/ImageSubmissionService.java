@@ -31,19 +31,19 @@ public class ImageSubmissionService {
 
     String s3Key = storageService.upload(id, blackWhite);
 
-    ImageSubmission saved =
-            persistenceService.save(id, image.getOriginalFilename(), email);
+    ImageSubmission saved = persistenceService.save(id, image.getOriginalFilename(), email);
 
     eventProducer.accept(
-            List.of(
-                    ImageSubmissionCreated.builder()
-                            .imageSubmissionId(id)
-                            .email(email)
-                            .s3Key(s3Key)
-                            .build()));
+        List.of(
+            ImageSubmissionCreated.builder()
+                .imageSubmissionId(id)
+                .email(email)
+                .s3Key(s3Key)
+                .build()));
 
     return saved;
   }
+
   public List<ImageSubmission> findAll() {
     return persistenceService.findAll();
   }

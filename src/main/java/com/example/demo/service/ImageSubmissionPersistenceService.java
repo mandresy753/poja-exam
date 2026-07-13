@@ -21,12 +21,12 @@ public class ImageSubmissionPersistenceService {
   public ImageSubmission save(UUID id, String filename, String email) {
 
     JImageSubmission entity =
-            JImageSubmission.builder()
-                    .id(id)
-                    .nomFichier(filename)
-                    .email(email)
-                    .createdAt(Instant.now())
-                    .build();
+        JImageSubmission.builder()
+            .id(id)
+            .nomFichier(filename)
+            .email(email)
+            .createdAt(Instant.now())
+            .build();
 
     return mapper.toModel(repository.save(entity));
   }

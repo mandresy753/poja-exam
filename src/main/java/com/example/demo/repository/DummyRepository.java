@@ -1,6 +1,5 @@
 package com.example.demo.repository;
 
-
 import com.example.demo.PojaGenerated;
 import com.example.demo.repository.model.Dummy;
 import java.util.List;

@@ -2,9 +2,8 @@ package com.example.demo.endpoint.event.model;
 
 import static java.lang.Math.random;
 
-import java.time.Duration;
-
 import com.example.demo.PojaGenerated;
+import java.time.Duration;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
