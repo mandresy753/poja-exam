@@ -1,8 +1,8 @@
 package image.submisson.demo.endpoint.event.model;
 
 import java.time.Duration;
-import lombok.*;
 import java.util.UUID;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,16 +12,17 @@ import java.util.UUID;
 @ToString
 @Builder
 public class ImageSubmissionCreated extends PojaEvent {
-    private UUID imageSubmissionId;
-    private String email;
-    private String s3Key;
-    @Override
-    public Duration maxConsumerDuration() {
-        return Duration.ofSeconds(45);
-    }
-    @Override
-    public Duration maxConsumerBackoffBetweenRetries() {
-        return Duration.ofSeconds(60);
-    }
+  private UUID imageSubmissionId;
+  private String email;
+  private String s3Key;
 
+  @Override
+  public Duration maxConsumerDuration() {
+    return Duration.ofSeconds(45);
+  }
+
+  @Override
+  public Duration maxConsumerBackoffBetweenRetries() {
+    return Duration.ofSeconds(60);
+  }
 }

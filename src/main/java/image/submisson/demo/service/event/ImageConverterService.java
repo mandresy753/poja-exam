@@ -1,136 +1,65 @@
 package image.submisson.demo.service.event;
 
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-
+import javax.imageio.ImageIO;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ImageConverterService {
 
+  public byte[] convert(MultipartFile image) {
 
-    public byte[] convert(
-            MultipartFile image
-    ) {
+    try {
 
+      BufferedImage originalImage = ImageIO.read(image.getInputStream());
 
-        try {
+      if (originalImage == null) {
 
-            BufferedImage originalImage =
-                    ImageIO.read(
-                            image.getInputStream()
-                    );
+        throw new ImageProcessingException("Image invalide");
+      }
 
+      BufferedImage blackWhiteImage =
+          new BufferedImage(
+              originalImage.getWidth(), originalImage.getHeight(), BufferedImage.TYPE_BYTE_GRAY);
 
-            if (originalImage == null) {
+      Graphics2D graphics = blackWhiteImage.createGraphics();
 
-                throw new ImageProcessingException(
-                        "Image invalide"
-                );
+      graphics.drawImage(originalImage, 0, 0, null);
 
-            }
+      graphics.dispose();
 
+      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
+      ImageIO.write(blackWhiteImage, getExtension(image), outputStream);
 
-            BufferedImage blackWhiteImage =
-                    new BufferedImage(
-                            originalImage.getWidth(),
-                            originalImage.getHeight(),
-                            BufferedImage.TYPE_BYTE_GRAY
-                    );
+      return outputStream.toByteArray();
 
+    } catch (Exception e) {
 
+      throw new ImageProcessingException("Erreur lors de la conversion de l'image");
+    }
+  }
 
-            Graphics2D graphics =
-                    blackWhiteImage.createGraphics();
+  private String getExtension(MultipartFile image) {
 
+    String filename = image.getOriginalFilename();
 
+    if (filename == null || !filename.contains(".")) {
 
-            graphics.drawImage(
-                    originalImage,
-                    0,
-                    0,
-                    null
-            );
-
-
-            graphics.dispose();
-
-
-
-            ByteArrayOutputStream outputStream =
-                    new ByteArrayOutputStream();
-
-
-
-            ImageIO.write(
-                    blackWhiteImage,
-                    getExtension(image),
-                    outputStream
-            );
-
-
-
-            return outputStream.toByteArray();
-
-
-
-        } catch (Exception e) {
-
-            throw new ImageProcessingException(
-                    "Erreur lors de la conversion de l'image"
-            );
-
-        }
-
+      return "png";
     }
 
+    return filename.substring(filename.lastIndexOf(".") + 1);
+  }
 
+  private static class ImageProcessingException extends RuntimeException {
 
+    public ImageProcessingException(String message) {
 
-    private String getExtension(
-            MultipartFile image
-    ) {
-
-
-        String filename =
-                image.getOriginalFilename();
-
-
-
-        if (filename == null || !filename.contains(".")) {
-
-            return "png";
-
-        }
-
-
-
-        return filename.substring(
-                filename.lastIndexOf(".") + 1
-        );
-
+      super(message);
     }
-
-
-
-
-    private static class ImageProcessingException
-            extends RuntimeException {
-
-
-        public ImageProcessingException(
-                String message
-        ) {
-
-            super(message);
-
-        }
-
-    }
-
+  }
 }
