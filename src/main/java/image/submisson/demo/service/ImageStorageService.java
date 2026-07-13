@@ -1,4 +1,4 @@
-package image.submisson.demo.service.event;
+package image.submisson.demo.service;
 
 import java.io.File;
 import java.nio.file.Files;

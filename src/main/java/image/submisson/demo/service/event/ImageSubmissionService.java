@@ -4,6 +4,7 @@ import image.submisson.demo.endpoint.event.EventProducer;
 import image.submisson.demo.endpoint.event.model.ImageSubmissionCreated;
 import image.submisson.demo.model.ImageSubmission;
 import image.submisson.demo.service.ImageConverterService;
+import image.submisson.demo.service.ImageStorageService;
 import image.submisson.demo.service.ImageSubmissionPersistenceService;
 import java.util.List;
 import java.util.UUID;
